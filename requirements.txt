@@ -1,0 +1,6 @@
+numpy
+shapely
+matplotlib
+topojson
+ClassyPie @ git+https://github.com/karimbahgat/ClassyPie
+pyproj
