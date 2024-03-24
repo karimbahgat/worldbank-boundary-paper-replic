@@ -1,0 +1,32 @@
+\hline
+\textbf{ADM0} \\
+\hspace{0.1cm} geoBoundaries (Open) & 340 & 721 & 119 & 84 & 678 & 172 & 75 \\
+\hspace{0.1cm} GADM v4.0.4 & - & - & - & - & - & - & - \\
+\hspace{0.1cm} OSM-Boundaries & - & - & - & - & - & - & - \\
+\hspace{0.1cm} UN SALB & - & - & - & - & - & - & - \\
+\hspace{0.1cm} OCHA & 366 & 58 & 123 & 293 & 584 & 387 & 102 \\
+\hspace{0.1cm} Natural Earth v5.0.1 & - & - & - & - & - & - & - \\
+\hline
+\textbf{ADM1} \\
+\hspace{0.1cm} geoBoundaries (Open) & 264 & 686 & 136 & 109 & 491 & 265 & 94 \\
+\hspace{0.1cm} GADM v4.0.4 & - & - & - & - & - & - & - \\
+\hspace{0.1cm} OSM-Boundaries & - & - & - & - & - & - & - \\
+\hspace{0.1cm} UN SALB & - & - & - & - & - & - & - \\
+\hspace{0.1cm} OCHA & 465 & 65 & 136 & 523 & 752 & 442 & 116 \\
+\hspace{0.1cm} Natural Earth v5.0.1 & - & - & - & - & - & - & - \\
+\hline
+\textbf{ADM2} \\
+\hspace{0.1cm} geoBoundaries (Open) & 586 & 353 & 175 & 224 & 1,107 & 661 & 112 \\
+\hspace{0.1cm} GADM v4.0.4 & - & - & - & - & - & - & - \\
+\hspace{0.1cm} OSM-Boundaries & - & - & - & - & - & - & - \\
+\hspace{0.1cm} UN SALB & - & - & - & - & - & - & - \\
+\hspace{0.1cm} OCHA & 620 & 67 & 198 & 887 & 903 & 495 & 179 \\
+\hspace{0.1cm} Natural Earth v5.0.1 & - & - & - & - & - & - & - \\
+\hline
+\textbf{ADM3} \\
+\hspace{0.1cm} geoBoundaries (Open) & 299 & 773 & 81 & 91 & 574 & 233 & 140 \\
+\hspace{0.1cm} GADM v4.0.4 & - & - & - & - & - & - & - \\
+\hspace{0.1cm} OSM-Boundaries & - & - & - & - & - & - & - \\
+\hspace{0.1cm} UN SALB & - & - & - & - & - & - & - \\
+\hspace{0.1cm} OCHA & 443 & - & 110 & 281 & 665 & 266 & 528 \\
+\hspace{0.1cm} Natural Earth v5.0.1 & - & - & - & - & - & - & - \\
