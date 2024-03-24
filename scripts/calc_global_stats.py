@@ -1,7 +1,4 @@
 # imports
-import boundarytools
-import numpy as np
-
 import os
 import sys
 import json
@@ -13,16 +10,24 @@ import datetime
 from time import time
 import itertools
 
-# params
+# import extras
+import numpy as np
 
-OUTPUT_DIR = 'global_stats'
+# set all paths relative to this script
+curdir = os.path.dirname(__file__)
+os.chdir(curdir)
+
+# params
+BRANCH = 'worldbank-replication' # which branch of the boundary data repo (geocontrast)
+RELATIONS_DIR = os.path.abspath('../temp/global_relations')
+OUTPUT_DIR = os.path.abspath('../temp/global_stats')
 REPLACE = False
 IGNORE_SOURCES = []
-MAXPROCS = 4
+MAXPROCS = 1
 
 
 def loop_country_levels():
-    url = 'https://raw.githubusercontent.com/wmgeolab/geoContrast/stable/releaseData/geoContrast-meta.csv'
+    url = f'https://raw.githubusercontent.com/wmgeolab/geoContrast/{BRANCH}/releaseData/geoContrast-meta.csv'
     raw = urlopen(url).read().decode('utf8')
     reader = csv.DictReader(raw.split('\n'))
     def key(row):
@@ -36,7 +41,7 @@ def get_country_level_stats(iso, level):
 
     # open areas
     try:
-        path = 'global_relations/{}-ADM{}-areas.json'.format(iso, level)
+        path = f'{RELATIONS_DIR}/{iso}-ADM{level}-areas.json'
         with open(path) as r:
             areas = json.loads(r.read())
     except:
@@ -44,7 +49,7 @@ def get_country_level_stats(iso, level):
 
     # open relations
     try:
-        path = 'global_relations/{}-ADM{}-relations.json'.format(iso, level)
+        path = f'{RELATIONS_DIR}/{iso}-ADM{level}-relations.json'
         with open(path) as r:
             relations = json.loads(r.read())
     except:
@@ -177,6 +182,10 @@ def process_logger(logfile, func, **kwargs):
 if __name__ == '__main__':
     maxprocs = MAXPROCS
     procs = []
+
+    # make sure output dir exists
+    if not os.path.lexists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
 
     # loop country levels
     for iso,level in loop_country_levels():

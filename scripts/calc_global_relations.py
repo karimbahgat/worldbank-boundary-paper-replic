@@ -1,4 +1,4 @@
-# imports
+# import builtins
 import os
 import sys
 import json
@@ -10,6 +10,7 @@ import datetime
 from time import time
 import tempfile
 
+# import extras
 import numpy as np
 from pyproj import Geod
 geod = Geod(ellps="WGS84")
@@ -25,9 +26,8 @@ sys.path.insert(0, os.path.abspath('../libs'))
 import boundarytools
 
 # params
-
-BRANCH = 'worldbank-replication'
-GB_VERSION = 'v5.0.0'
+BRANCH = 'worldbank-replication' # which branch of the boundary data repo (geocontrast)
+GB_VERSION = 'v5.0.0' # which branch of the geoboundaries data repo
 OUTPUT_DIR = os.path.abspath('../temp/global_relations')
 SOURCES = ['geoBoundaries (Open)', 'GADM v4.0.4', 'OSM-Boundaries', 'UN SALB', 'OCHA', 'Natural Earth v5.0.1']
 IGNORE_SOURCES = []
@@ -335,6 +335,10 @@ def process_logger(logfile, func, **kwargs):
 if __name__ == '__main__':
     maxprocs = MAXPROCS
     procs = []
+
+    # make sure output dir exists
+    if not os.path.lexists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
 
     # loop country levels
     for iso,level in loop_country_levels():
