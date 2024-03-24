@@ -1,11 +1,4 @@
 # imports
-import boundarytools
-import numpy as np
-from pyproj import Geod
-geod = Geod(ellps="WGS84")
-from shapely.geometry import shape
-from shapely.validation import make_valid
-
 import os
 import sys
 import json
@@ -17,13 +10,28 @@ import datetime
 from time import time
 import tempfile
 
+import numpy as np
+from pyproj import Geod
+geod = Geod(ellps="WGS84")
+from shapely.geometry import shape
+from shapely.validation import make_valid
+
+# set all paths relative to this script
+curdir = os.path.dirname(__file__)
+os.chdir(curdir)
+
+# import custom libs
+sys.path.insert(0, os.path.abspath('../libs'))
+import boundarytools
+
 # params
 
-BRANCH = 'gadm4'
-OUTPUT_DIR = 'global_relations'
+BRANCH = 'worldbank-replication'
+GB_VERSION = 'v5.0.0'
+OUTPUT_DIR = os.path.abspath('../temp/global_relations')
 SOURCES = ['geoBoundaries (Open)', 'GADM v4.0.4', 'OSM-Boundaries', 'UN SALB', 'OCHA', 'Natural Earth v5.0.1']
 IGNORE_SOURCES = []
-MAXPROCS = 2
+MAXPROCS = 1
 COUNTRIES = [] #'CAN','CHL']
 
 
@@ -47,10 +55,17 @@ def loop_country_levels():
 def get_country_level_areas(country, level):
     # first get all possible sources
     sourcedict = boundarytools.utils.find_geocontrast_sources(country, level, branch=BRANCH)
-    sourcedict = dict([(s,u.replace('/stable/',f'/{BRANCH}/')) for s,u in sourcedict.items()]) # override with chosen branch
+    # override source urls with specified branch or gb version
+    for s,u in list(sourcedict.items()):
+        if 'geoboundaries' in u.lower():
+            # data hosted by geoboundaries
+            sourcedict[s] = u.replace('/main/',f'/{GB_VERSION}/')
+        else:
+            # data hosted by geocontrast
+            sourcedict[s] = u.replace('/stable/',f'/{BRANCH}/')
     print('available sources:', sourcedict.keys())
 
-    # define how to load and prep each source 
+    # define how to load and prep each source
     def load_source(url):
         print('loading', url)
         coll = boundarytools.utils.load_topojson_url(url, load_shapely=True)

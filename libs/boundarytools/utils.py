@@ -86,6 +86,10 @@ def iter_geocontrast_metatable(branch='stable'):
     raw = urlopen(url).read().decode('utf8').split('\n')
     reader = csv.DictReader(raw, delimiter=',')
     for row in reader:
+        # apply fix for geoboundaries
+        # storage was changed to lfs which results in different download url
+        if 'geoBoundaries' in row['apiURL']:
+            row['apiURL'] = row['apiURL'].replace('raw.githubusercontent.com/', 'media.githubusercontent.com/media/')
         yield row
 
 def find_geocontrast_sources(iso, level, branch='stable'):
